@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 
 public class AplicationLogic {
+
     private DB DBItems;
     public AplicationLogic(){
        this.DBItems=new DB();
@@ -62,10 +63,15 @@ public class AplicationLogic {
         this.DBItems.write(items);
     }
 
+    public void  addQuantity(String id){
+        List<InventoryItem> items=  this.DBItems.ItemDB();
+        InventoryItem item=items.stream().filter(x->x.getItemID().equals(id)).findFirst().get();
+        item.setQuantity(item.getQuantity()+1);
+        this.DBItems.write(items);
+    }
+
     public void showAllItemsInCategory(){
       List<InventoryItem> items=  this.DBItems.ItemDB();
-
-
 
         Map<String,List<InventoryItem>> uniqPeopleByAge = items.stream().distinct().collect(groupingBy(Item::getingItemCategory));
 
@@ -77,6 +83,7 @@ public class AplicationLogic {
                 System.out.println("Quantity "+curentElement.getQuantity());
                 System.out.println("Details "+curentElement.gettingItemDetails());
                 System.out.println("Description "+curentElement.displayingItemDescription());
+                System.out.println("Price "+curentElement.getingItemPrice());
                 System.out.println();
             }
 

@@ -21,7 +21,7 @@ public class InventoryItem extends Item {
     }
 
 
-    private int quantity;
+    private int quantity=1;
 
     public int getQuantity() {
         return quantity;
